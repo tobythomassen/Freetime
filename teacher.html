@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="A points management system for schools to distribute points and goods.">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+        <title>Freetime</title>
+
+        <meta name="mobile-web-app-capable" content="yes">
+        <link rel="icon" sizes="192x192" href="assets/images/android-desktop.png">
+
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="apple-mobile-web-app-title" content="Material Design Lite">
+        <link rel="apple-touch-icon-precomposed" href="assets/images/ios-desktop.png">
+
+        <meta name="msapplication-TileImage" content="assets/images/touch/ms-touch-icon-144x144-precomposed.png">
+        <meta name="msapplication-TileColor" content="#3372DF">
+
+        <link rel="shortcut icon" href="assets/images/favicon.png">
+
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.deep_purple-indigo.min.css" />
+        <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+        <link rel="stylesheet" href="assets/css/teacher.css">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+        <style>
+            #view-source {
+      position: fixed;
+      display: block;
+      right: 0;
+      bottom: 0;
+      margin-right: 40px;
+      margin-bottom: 40px;
+      z-index: 900;
+    }
+    </style>
+    </head>
+
+    <body>
+        <div class="layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
+            <header class="header mdl-layout__header">
+                <div class="mdl-layout__header-row">
+                    <span class="mdl-layout-title">Home</span>
+                    <div class="mdl-layout-spacer"></div>
+                </div>
+            </header>
+
+            <div class="mdl-layout__drawer">
+                <header class="drawer-header">
+                    <img src="assets/images/user1.png" id="acct-icon" class="avatar">
+                    <div class="avatar-dropdown">
+                        <span id="acct-tag">Not Signed In</span>
+                        <div class="mdl-layout-spacer"></div>
+                    </div>
+                </header>
+                <nav class="navigation-bar mdl-navigation">
+                    <a class="mdl-navigation__link settings"><i class="material-icons" role="presentation">settings</i>Settings</a>
+                    <a class="mdl-navigation__link signout"><i class="material-icons" role="presentation">close</i>Sign
+                        Out</a>
+                    <div class="mdl-layout-spacer"></div>
+                </nav>
+            </div>
+
+            <main class="mdl-layout__content">
+                <div class="mdl-grid main-content">
+                    <div class="cards mdl-cell mdl-grid">
+                        <div class="store-box mdl-card mdl-shadow--2dp mdl-cell">
+                            <div class="mdl-card__title mdl-card--expand mdl-color--accent">
+                                <h2 class="mdl-card__title-text">Rewards</h2>
+                            </div>
+
+                            <table class="item-table mdl-data-table mdl-js-data-table mdl-shadow--2dp mdl-card__supporting-text">
+                                <thead>
+                                    <tr>
+                                        <th class="mdl-data-table__cell--non-numeric">Item</th>
+                                        <th class="mdl-data-table__cell--non-numeric">Description</th>
+                                        <th>Price</th>
+                                        <th class="mdl-data-table__cell--non-numeric">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="itemTable">
+                                    <tr>
+                                        <td class="mdl-data-table__cell--non-numeric">Test Item</td>
+                                        <td class="mdl-data-table__cell--non-numeric">This item is a test</td>
+                                        <td>1</td>
+                                        <td class="mdl-data-table__cell--non-numeric"><button onClick="itemButton(0)"
+                                                class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary">Edit</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="mdl-data-table__cell--non-numeric">Woah Item</td>
+                                        <td class="mdl-data-table__cell--non-numeric">meme review</td>
+                                        <td>6969420</td>
+                                        <td class="mdl-data-table__cell--non-numeric"><button onClick="itemButton(1)"
+                                                class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary">Edit</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <div class="mdl-card__actions mdl-card--border">
+                                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-color-text--primary">
+                                    Save
+                                </a>
+                                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-color-text--primary"
+                                    onClick="newItem()">
+                                    Create New
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="users-box mdl-card mdl-shadow--2dp mdl-cell">
+                            <div class="mdl-card__title mdl-card--expand mdl-color--accent">
+                                <h2 class="mdl-card__title-text">Your Students</h2>
+                            </div>
+                            <div class="mdl-card__supporting-text" id="users">
+                                <ul class="demo-list-three mdl-list">
+                                    <li class="mdl-list__item mdl-list__item--three-line">
+                                        <span class="mdl-list__item-primary-content">
+                                            <i class="material-icons  mdl-list__item-avatar">person</i>
+                                            <span>Display Name</span>
+                                            <span class="mdl-list__item-text-body">
+                                                Full Name has 0 point(s)
+                                            </span>
+                                        </span>
+                                        <span class="mdl-list__item-secondary-content">
+                                            <a class="mdl-list__item-secondary-action"><button onClick="userButton(0)"
+                                                    class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary user-button">Reward</button></a>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+        <dialog class="mdl-dialog settings-dialog">
+            <div class="mdl-dialog__title">
+                Settings
+            </div>
+            <div class="mdl-dialog__content">
+                <!-- No settings at the moment -->
+                <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-2">
+                    <input type="checkbox" id="switch-2" class="mdl-switch__input footer-switch">
+                    <span class="mdl-switch__label">Dark Mode</span>
+                </label>
+            </div>
+            <div class="mdl-dialog__actions">
+                <button type="button" class="mdl-button close">Close</button>
+            </div>
+        </dialog>
+
+        <dialog class="mdl-dialog item-edit-dialog">
+            <div class="mdl-dialog__title">
+                Edit Item
+            </div>
+            <div class="mdl-dialog__content">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label itemName">
+                    <input class="mdl-textfield__input" type="text" id="itemName">
+                    <label class="mdl-textfield__label" for="itemName">Item Name</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label itemDesc">
+                    <input class="mdl-textfield__input" type="text" id="itemDesc">
+                    <label class="mdl-textfield__label" for="itemDesc">Item Description</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label itemPrice">
+                    <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="itemPrice">
+                    <label class="mdl-textfield__label" for="itemPrice">Price</label>
+                    <span class="mdl-textfield__error">The price needs to be a number!</span>
+                </div>
+            </div>
+            <div class="mdl-dialog__actions">
+                <button type="button" class="mdl-button save">Save</button>
+                <button type="button" class="mdl-button close">Cancel</button>
+            </div>
+        </dialog>
+
+        <dialog class="mdl-dialog item-new-dialog">
+            <div class="mdl-dialog__title">
+                New Item
+            </div>
+            <div class="mdl-dialog__content">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" id="newItemName">
+                    <label class="mdl-textfield__label" for="newItemName">Item Name</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" id="newItemDesc">
+                    <label class="mdl-textfield__label" for="newItemDesc">Item Description</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="newItemPrice">
+                    <label class="mdl-textfield__label" for="newItemPrice">Price</label>
+                    <span class="mdl-textfield__error">The price needs to be a number!</span>
+                </div>
+            </div>
+            <div class="mdl-dialog__actions">
+                <button type="button" class="mdl-button save">Add</button>
+                <button type="button" class="mdl-button close">Cancel</button>
+            </div>
+        </dialog>
+
+        <dialog class="mdl-dialog reward-user-dialog">
+            <div class="mdl-dialog__title">
+                Reward User
+            </div>
+            <div class="mdl-dialog__content">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="ptsReward">
+                    <label class="mdl-textfield__label" for="ptsReward">Points to reward</label>
+                    <span class="mdl-textfield__error">The reward needs to be a number!</span>
+                </div>
+            </div>
+            <div class="mdl-dialog__actions">
+                <button type="button" class="mdl-button reward">Reward</button>
+                <button type="button" class="mdl-button close">Cancel</button>
+            </div>
+        </dialog>
+        <script src="./assets/js/teacher.js"></script>
+    </body>
+
+</html>
